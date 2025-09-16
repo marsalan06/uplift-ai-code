@@ -1,0 +1,20 @@
+{
+  "name": "uplift-story-teller-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@livekit/components-react": "^2.9.14",
+    "@upliftai/assistants-react": "^0.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "livekit-client": "^2.15.7",
+    "node-fetch": "^3.3.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}

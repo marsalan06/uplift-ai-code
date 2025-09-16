@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Story Teller MVP (UpliftAI + React)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+    
+    <!-- React from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- LiveKit client with better loading -->
+    <script>
+      window.livekitLoadStarted = Date.now();
+      console.log('Starting LiveKit load...');
+    </script>
+    <script src="https://unpkg.com/livekit-client@2.15.7/dist/livekit-client.umd.js" 
+            onload="console.log('LiveKit loaded successfully in', Date.now() - window.livekitLoadStarted, 'ms'); window.livekitLoadSuccess = true;" 
+            onerror="console.error('LiveKit failed to load from unpkg'); window.livekitLoadFailed = true;"></script>
+    
+    <!-- Fallback LiveKit loading -->
+    <script>
+      setTimeout(() => {
+        if (!window.LiveKitClient && !window.livekitLoadSuccess) {
+          console.log('Trying fallback LiveKit source...');
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/livekit-client@2.15.7/dist/livekit-client.umd.js';
+          script.onload = () => {
+            console.log('LiveKit loaded from fallback source');
+            window.livekitLoadSuccess = true;
+          };
+          script.onerror = () => {
+            console.error('All LiveKit sources failed');
+            window.livekitLoadFailed = true;
+          };
+          document.head.appendChild(script);
+        }
+      }, 2000);
+    </script>
+    <style>
+      body { font-family: system-ui, Arial; max-width: 760px; margin: 32px auto; padding: 0 16px; }
+      .row { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+      input { flex: 1; padding: 10px; }
+      button { padding: 10px 14px; cursor: pointer; }
+      .state { margin-top: 10px; color: #2563eb; }
+      audio { width: 100%; margin-top: 12px; }
+      .muted { opacity: 0.65; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="text/babel" src="./app.js"></script>
+  </body>
+</html>
